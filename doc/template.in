@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html$if(lang)$ lang="$lang$"$endif$>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>$pagetitle$ &ndash; @PROJECT_NAME@ API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1 class="title">$title$</h1>
+<h1 class="toc"><a href="index.html">Table of Contents</a></h1>
+<h1 class="manual">FZMQ Manual &ndash; @PROJECT_NAME@/@PROJECT_VERSION@</h1>
+</header>
+$body$
+<footer>
+  <p>FZMQ is public domain software.</p>
+  <p>ØMQ is copyright (c) 2007-2015 iMatix Corporation and Contributors.
+  ØMQ is free software licensed under the LGPL.  ØMQ, ZeroMQ, and 0MQ are
+  trademarks of iMatrix Corporation.
+  <a href="http://api.zeromq.org/legal:terms-of-use">Terms of Use</a> &mdash;
+  <a href="http://api.zeromq.org/legal:privacy-policy">Privacy Policy</a></p>
+</footer>
+</body>
+</html>

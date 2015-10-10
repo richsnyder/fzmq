@@ -1,6 +1,34 @@
 # Load and run select CMake files.
 
-INCLUDE(Testing)
+INCLUDE(CMakeParseArguments)
+
+# Locate all of the required dependencies.
+
+FIND_PACKAGE(OpenMP REQUIRED)
+
+# Define functions.
+
+FUNCTION(ADD_OPENMP_TEST A_NAME)
+
+  # Parse the arguments to the function.
+  CMAKE_PARSE_ARGUMENTS(A
+    ""
+    ""
+    "SOURCE"
+    ${ARGN}
+  )
+
+  IF(NOT A_SOURCE)
+    STRING(REPLACE "-" "_" A_SOURCE "${A_NAME}.f90")
+  ENDIF()
+
+  ADD_EXECUTABLE(${A_NAME} ${A_SOURCE} assert.f90)
+  SET_TARGET_PROPERTIES(${A_NAME} PROPERTIES COMPILE_FLAGS ${OpenMP_Fortran_FLAGS})
+  SET_TARGET_PROPERTIES(${A_NAME} PROPERTIES LINK_FLAGS ${OpenMP_Fortran_FLAGS})
+  TARGET_LINK_LIBRARIES(${A_NAME} ${EXTRA_LIBS})
+  ADD_TEST(NAME ${A_NAME} COMMAND ${A_NAME})
+
+ENDFUNCTION()
 
 # Include project build directories and libraries.
 
@@ -9,19 +37,19 @@ LIST(APPEND EXTRA_LIBS fzmq)
 
 # Add unit tests.
 
-ADD_OPENMP_TEST(test-version SOURCE test_version.f90)
-ADD_OPENMP_TEST(test-has SOURCE test_has.f90)
-ADD_OPENMP_TEST(test-z85 SOURCE test_z85.f90)
-ADD_OPENMP_TEST(test-message SOURCE test_message.f90)
-ADD_OPENMP_TEST(test-context SOURCE test_context.f90)
-ADD_OPENMP_TEST(test-error SOURCE test_error.f90)
-ADD_OPENMP_TEST(test-socket SOURCE test_socket.f90)
-ADD_OPENMP_TEST(test-send-recv SOURCE test_send_recv.f90)
-ADD_OPENMP_TEST(test-send-recv-string SOURCE test_send_recv_string.f90)
-ADD_OPENMP_TEST(test-send-recv-message SOURCE test_send_recv_message.f90)
-ADD_OPENMP_TEST(test-send-recv-multipart SOURCE test_send_recv_multipart.f90)
-ADD_OPENMP_TEST(test-msg-get SOURCE test_msg_get.f90)
-ADD_OPENMP_TEST(test-poll SOURCE test_poll.f90)
-ADD_OPENMP_TEST(test-proxy-steerable SOURCE test_proxy_steerable.f90)
-ADD_OPENMP_TEST(test-context-deprecated SOURCE test_context_deprecated.f90)
-ADD_OPENMP_TEST(test-send-recv-deprecated SOURCE test_send_recv_deprecated.f90)
+ADD_OPENMP_TEST(test-version)
+ADD_OPENMP_TEST(test-has)
+ADD_OPENMP_TEST(test-z85)
+ADD_OPENMP_TEST(test-message)
+ADD_OPENMP_TEST(test-context)
+ADD_OPENMP_TEST(test-error)
+ADD_OPENMP_TEST(test-socket)
+ADD_OPENMP_TEST(test-send-recv)
+ADD_OPENMP_TEST(test-send-recv-string)
+ADD_OPENMP_TEST(test-send-recv-message)
+ADD_OPENMP_TEST(test-send-recv-multipart)
+ADD_OPENMP_TEST(test-msg-get)
+ADD_OPENMP_TEST(test-poll)
+ADD_OPENMP_TEST(test-proxy-steerable)
+ADD_OPENMP_TEST(test-context-deprecated)
+ADD_OPENMP_TEST(test-send-recv-deprecated)

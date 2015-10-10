@@ -13,14 +13,6 @@
 #   ZeroMQ_INCLUDE_DIR      Where to find the ZeroMQ header files
 #   ZeroMQ_LIBRARY          Where to find the ZeroMQ library
 #
-# ------------------------------------------------------------------------------
-#
-# Copyright (c) 2014, Richard Snyder
-#
-# Use, modification, and distribution is subject to the BSD License.
-# See the accompanying file LICENSE.md for the full license.
-# Terms can also be found at http://creativecommons.org/licenses/BSD/.
-#
 # ==============================================================================
 
 FIND_PATH(ZeroMQ_INCLUDE_DIR zmq.h)

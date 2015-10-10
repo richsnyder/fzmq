@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0)
 
-PROJECT(fzmq LANGUAGES Fortran VERSION 0.5.0)
+PROJECT(fzmq LANGUAGES Fortran VERSION 0.6.0)
 
 # Add custom modules to the module search path and mark them for installation.
 
@@ -12,7 +12,7 @@ FIND_PACKAGE(ZeroMQ REQUIRED)
 INCLUDE_DIRECTORIES(${ZeroMQ_INCLUDE_DIRS})
 LIST(APPEND EXTRA_LIBS ${ZeroMQ_LIBRARIES})
 
-# Add the project subdirectories.
+# Add the project subdirectory.
 
 ADD_SUBDIRECTORY(src)
 
@@ -22,4 +22,11 @@ OPTION(BUILD_TESTS "Build unit tests." ON)
 IF (BUILD_TESTS)
   ENABLE_TESTING()
   ADD_SUBDIRECTORY(tests)
+ENDIF()
+
+# Determine whether or not to build the documentation.
+
+OPTION(BUILD_DOCS "Build documentation." ON)
+IF (BUILD_DOCS)
+  ADD_SUBDIRECTORY(doc)
 ENDIF()

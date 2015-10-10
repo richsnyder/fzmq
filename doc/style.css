@@ -1,0 +1,108 @@
+html {
+  font-family: sans-serif;
+  line-height: 1.2;
+}
+
+body {
+  margin: 1em 4em 0 4em;
+}
+
+header {
+  padding-bottom: 2em;
+}
+
+footer {
+  font-size: 0.8em;
+  color: #777;
+  padding-top: 2em;
+}
+
+h1 {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+h1.title {
+  float: left;
+  text-align: left;
+  width: 33.33%;
+}
+
+h1.toc {
+  float: left;
+  text-align: center;
+  width: 33.34%;
+}
+
+h1.manual {
+  float: left;
+  width: 33.33%;
+  text-align: right;
+}
+
+h2 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 1.0em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+blockquote {
+  border: 1pt dashed black;
+  margin: 1em 8em 1em 8em;
+  padding-right: 2em;
+  padding-left: 2em;
+}
+
+pre {
+  line-height: 1.05;
+}
+
+dt {
+  font-weight: bold;
+  margin-left: 1.0em;
+}
+
+dd {
+  margin: 0.25em 0 1em 2.5em;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table, th, td {
+  border: 1pt solid #aaa;
+}
+
+th, td {
+  padding: 0.5em;
+}
+
+a {
+  color: #F00;
+  text-decoration: none;
+}
+
+.example {
+  background-color: #eee;
+  border: 1pt dashed #ccc;
+  font-size: 0.91em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 1.5em;
+}
+
+.synopsis {
+  border: 1pt dashed;
+  font-size: 1.2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 1em;
+}
