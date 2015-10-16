@@ -4,7 +4,7 @@
 Name
 ----
 
-zmq_msg_size - retrieve message content size in bytes
+zmq_msg_size - retrieve a message's content size in bytes
 
 
 Synopsis
@@ -24,7 +24,7 @@ Description
 The *zmq_msg_size()* function shall return the size in bytes of the content of
 the message object referenced by _message_.
 
-Never access _zmq_msg_t_ members directly, instead always use the *zmq_msg*
+Never access *zmq_msg_t* members directly, instead always use the *zmq_msg*
 family of functions.
 
 
@@ -41,6 +41,24 @@ Errors
 No errors are defined.
 
 
+Example
+-------
+
+### Get the size of a received message
+
+~~~{.example}
+TYPE(C_PTR) :: socket
+TYPE(ZMQ_MSG_T) :: message
+INTEGER(KIND = C_INT) :: rc
+INTEGER(KIND = C_INT) :: nbytes
+INTEGER(KIND = C_SIZE_T) :: size
+
+rc = zmq_msg_init(message)
+nbytes = zmq_msg_recv(message, socket, 0)
+size = zmq_msg_size(message)
+~~~
+
+
 See also
 --------
 
@@ -49,3 +67,4 @@ See also
 [zmq_msg_init_size][]
 [zmq_msg_init_data][]
 [zmq_msg_close][]
+[fzmq][]

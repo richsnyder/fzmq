@@ -27,23 +27,22 @@ _option_name_ argument.
 
 The *zmq_ctx_get()* function accepts the following option names:
 
+*ZMQ_IO_THREADS*
+  ~ *Get number of I/O threads*.  The *ZMQ_IO_THREADS* argument returns the
+    size of the ØMQ thread pool for this _context_.
 
-ZMQ_IO_THREADS:
-  ~ *Get number of I/O threads*.  The _ZMQ_IO_THREADS_ argument returns the
-    size of the ØMQ thread pool for this context.
+*ZMQ_MAX_SOCKETS*
+  ~ *Get maximum number of sockets*.  The *ZMQ_MAX_SOCKETS* argument returns
+    the maximum number of sockets allowed for this _context_.
 
-ZMQ_MAX_SOCKETS
-  ~ *Get maximum number of sockets*.  The _ZMQ_MAX_SOCKETS_ argument returns
-    the maximum number of sockets allowed for this context.
-
-ZMQ_SOCKET_LIMIT
-  ~ *Get largest configurable number of sockets.* The _ZMQ_SOCKET_LIMIT_
+*ZMQ_SOCKET_LIMIT*
+  ~ *Get largest configurable number of sockets.*  The *ZMQ_SOCKET_LIMIT*
     argument returns the largest number of sockets that [zmq_ctx_set][] will
     accept.
 
-ZMQ_IPV6
-  ~ *Get IPv6 option*. The _ZMQ_IPV6_ argument returns the IPv6 option for
-    the context.
+*ZMQ_IPV6*
+  ~ *Get IPv6 option*.  The *ZMQ_IPV6* argument returns the IPv6 option for
+    the _context_.
 
 
 Return value
@@ -57,7 +56,7 @@ below.
 Errors
 ------
 
-EINVAL
+*EINVAL*
   ~ The requested option _option_name_ is unknown.
 
 
@@ -67,8 +66,12 @@ Example
 ### Setting a limit on the number of sockets
 
 ~~~{.example}
+TYPE(C_PTR) :: context
+INTEGER(KIND = C_INT) :: rc
+INTEGER(KIND = C_INT) :: max_sockets
+
 context = zmq_ctx_new()
-code = zmq_ctx_set(context, ZMQ_MAX_SOCKETS, 256)
+rc = zmq_ctx_set(context, ZMQ_MAX_SOCKETS, 256)
 max_sockets = zmq_ctx_get(context, ZMQ_MAX_SOCKETS)
 ~~~
 
@@ -77,3 +80,4 @@ See also
 --------
 
 [zmq_ctx_set][]
+[fzmq][]

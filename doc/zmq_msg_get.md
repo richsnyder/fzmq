@@ -28,16 +28,16 @@ _message_ argument.
 
 The following properties can be retrieved with the *zmq_msg_get()* function:
 
-ZMQ_MORE
+*ZMQ_MORE*
   ~ Indicates that there are more message frames to follow after the _message_.
 
-ZMQ_SRCFD
-  ~ Returns the file descriptor of the socket the _message_ was read from. This
-    allows application to retrieve the remote endpoint via _getpeername(2)_. Be
-    aware that the respective socket might be closed already, reused even.
-    Currently only implemented for TCP sockets.
+*ZMQ_SRCFD*
+  ~ Returns the file descriptor of the socket the _message_ was read from.
+    This allows application to retrieve the remote endpoint via
+    *getpeername(2)*.  Be aware that the respective socket might be closed
+    already, reused even.  Currently only implemented for TCP sockets.
 
-ZMQ_SHARED
+*ZMQ_SHARED*
   ~ Indicates that a message MAY share underlying storage with another copy of
     this message.
 
@@ -46,35 +46,46 @@ Return value
 ------------
 
 The *zmq_msg_get()* function shall return the value for the property if
-successful. Otherwise it shall return `-1` and set _errno_ to one of the
+successful.  Otherwise it shall return `-1` and set _errno_ to one of the
 values defined below.
 
 
 Errors
 ------
 
-EINVAL
+*EINVAL*
   ~ The requested _property_ is unknown.
 
 
 Example
 -------
 
-### Receiving a multi-frame message
+### Receiving a multi-part message
 
 ~~~{.example}
-TYPE(ZMQ_MSG_T) :: frame
+TYPE(C_PTR) :: context
+TYPE(C_PTR) :: socket
+TYPE(ZMQ_MSG_T) :: message
+INTEGER(KIND = C_INT) :: rc
+
+context = zmq_ctx_new()
+socket = zmq_socket(context, ZMQ_REP)
+rc = zmq_bind(socket, 'tcp://*:5555')
+
 DO WHILE (.TRUE.)
-  rc = zmq_msg_init(frame)
-  rc = zmq_msg_recv(socket, frame, 0)
-  IF (zmq_msg_get(frame, ZMQ_MORE) == 1) THEN
+  rc = zmq_msg_init(message)
+  rc = zmq_msg_recv(message, socket, 0)
+  IF (zmq_msg_get(message, ZMQ_MORE) == 1) THEN
     PRINT*, 'more'
   ELSE
     PRINT*, 'end'
     EXIT
   END IF
-  rc = zmq_msg_close(frame)
+  rc = zmq_msg_close(message)
 END DO
+
+rc = zmq_close(socket)
+rc = zmq_ctx_term(context)
 ~~~
 
 
@@ -84,3 +95,4 @@ See also
 [zmq_msg_set][]
 [zmq_msg_init][]
 [zmq_msg_close][]
+[fzmq][]

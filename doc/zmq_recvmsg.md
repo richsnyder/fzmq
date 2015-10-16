@@ -23,103 +23,76 @@ FUNCTION zmq_recvmsg(socket, message, flags) RESULT(nbytes)
 Description
 -----------
 
+This API method is deprecated in favor of [zmq_msg_recv][].
+
 The *zmq_recvmsg()* function shall receive a message part from the socket
 referenced by the _socket_ argument and store it in the message referenced by
-the _message_ argument. Any content previously stored in _message_ shall be
-properly deallocated. If there are no message parts available on the specified _socket_ the *zmq_recvmsg()* function shall block until the request can be satisfied. The _flags_ argument is a combination of the flags defined below:
+the _message_ argument.  Any content previously stored in _message_ shall be
+properly deallocated.  If there are no message parts available on the specified _socket_ the *zmq_recvmsg()* function shall block until the request can be satisfied.  The _flags_ argument is a combination of the flags defined below:
 
-ZMQ_DONTWAIT
-  ~ Specifies that the operation should be performed in non-blocking mode. If
+*ZMQ_DONTWAIT*
+  ~ Specifies that the operation should be performed in non-blocking mode.  If
     there are no messages available on the specified _socket_, the
-    *zmq_recvmsg()* function shall fail with _errno_ set to EAGAIN.
-
-> This API method is deprecated in favor of [zmq_msg_recv][].
+    *zmq_recvmsg()* function shall fail with _errno_ set to *EAGAIN*.
 
 ### Multi-part messages
 
-A ØMQ message is composed of 1 or more message parts. Each message part is an
-independent _zmq_msg_t_ in its own right. ØMQ ensures atomic delivery of
+A ØMQ message is composed of one or more message parts. Each message part is an
+independent *zmq_msg_t* in its own right.  ØMQ ensures atomic delivery of
 messages: peers shall receive either all _message parts_ of a message or none
-at all. The total number of message parts is unlimited except by available
+at all.  The total number of message parts is unlimited except by available
 memory.
 
-An application that processes multi-part messages must use the _ZMQ_RCVMORE_
-linkzmq:zmq_getsockopt[3] option after calling *zmq_recvmsg()* to determine if
-there are further parts to receive.
+An application that processes multi-part messages must use either
+*zmq_msg_more()* or the *ZMQ_RCVMORE* [zmq_getsockopt][] option after calling
+*zmq_recvmsg()* to determine if there are further parts to receive.
 
 
 Return value
 ------------
 
-The *zmq_recvmsg()* function shall return number of bytes in the message
-if successful. Otherwise it shall return `-1` and set _errno_ to one of the
+The *zmq_recvmsg()* function shall return the number of bytes in the message
+if successful.  Otherwise it shall return `-1` and set _errno_ to one of the
 values defined below.
 
 
 Errors
 ------
 
-EAGAIN
+*EAGAIN*
   ~ Non-blocking mode was requested and no messages are available at the
     moment.
 
-ENOTSUP
+*ENOTSUP*
   ~ The *zmq_recvmsg()* operation is not supported by this socket type.
 
-EFSM
+*EFSM*
   ~ The *zmq_recvmsg()* operation cannot be performed on this socket at the
     moment due to the socket not being in the appropriate state.  This error
     may occur with socket types that switch between several states, such as
-    _ZMQ_REP_.  See the _messaging patterns_ section of [zmq_socket][] for more
+    *ZMQ_REP*.  See the _messaging patterns_ section of [zmq_socket][] for more
     information.
 
-ETERM
+*ETERM*
   ~ The ØMQ _context_ associated with the specified _socket_ was terminated.
 
-ENOTSOCK
+*ENOTSOCK*
   ~ The provided _socket_ was invalid.
 
-EINTR
+*EINTR*
   ~ The operation was interrupted by delivery of a signal before a message was
     available.
 
-EFAULT
+*EFAULT*
   ~ The message passed to the function was invalid.
-
-
-Example
--------
-
-### Receiving a message from a socket
-
-~~~{.example}
-TYPE(ZMQ_MSG_T) :: message
-rc = zmq_msg_init(message)
-rc = zmq_recvmsg(socket, message, 0)
-rc = zmq_msg_close(message)
-~~~
-
-### Receiving a multi-part message
-
-~~~{.example}
-TYPE(ZMQ_MSG_T) :: frame
-INTEGER(KIND = C_INT), TARGET :: more
-DO WHILE (.TRUE.)
-  rc = zmq_msg_init(frame)
-  rc = zmq_recvmsg(socket, frame, 0)
-  rc = zmq_getsockopt(socket, ZMQ_RCVMORE, C_LOC(more), C_SIZEOF(more))
-  rc = zmq_msg_close(frame)
-  IF (more == 1) THEN
-    EXIT
-  END IF
-END DO
-~~~
 
 
 See also
 --------
 
-[zmq_recv][]
+[zmq_msg_send][]
+[zmq_msg_recv][]
 [zmq_send][]
-[zmq_getsockopt][]
+[zmq_recv][]
 [zmq_socket][]
+[fzmq][]

@@ -58,8 +58,8 @@ blockquote {
   padding-left: 2em;
 }
 
-pre {
-  line-height: 1.05;
+dd {
+  margin: 0.25em 0 1em 2.5em;
 }
 
 dt {
@@ -67,8 +67,8 @@ dt {
   margin-left: 1.0em;
 }
 
-dd {
-  margin: 0.25em 0 1em 2.5em;
+pre {
+  line-height: 1.05;
 }
 
 table {
@@ -86,13 +86,19 @@ th, td {
 }
 
 a {
-  color: #F00;
+  background-color: #F7F7F7;
+  color: #2A5DB0;
+  padding: 0.25em 0.15em;
   text-decoration: none;
 }
 
+a:hover {
+  color: #5B8AD7;
+  text-decoration: underline;
+}
+
 .example {
-  background-color: #eee;
-  border: 1pt dashed #ccc;
+  background-color: #EEE;
   font-size: 0.91em;
   margin-top: 0.5em;
   margin-bottom: 0.5em;

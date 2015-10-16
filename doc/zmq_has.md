@@ -22,10 +22,10 @@ Description
 -----------
 
 The *zmq_has()* function shall report whether a specified capability is
-available in the library. This allows bindings and applications to probe
+available in the library.  This allows bindings and applications to probe
 a library directly, for transport and security options.
 
-Capabilities shall be lowercase strings. The following capabilities are
+Capabilities shall be lowercase strings.  The following capabilities are
 defined:
 
 * ipc - the library supports the ipc:// protocol
@@ -40,4 +40,22 @@ Return value
 ------------
 
 The *zmq_has()* function shall return `1` if the specified capability is
-provided. Otherwise it shall return `0`.
+provided.  Otherwise it shall return `0`.
+
+
+Example
+-------
+
+### Find out if the library supports the ipc protocol
+
+~~~{.example}
+INTEGER(KIND = C_INT) :: has_ipc
+
+has_ipc = zmq_has('ipc')
+~~~
+
+
+See also
+--------
+
+[fzmq][]

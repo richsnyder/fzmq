@@ -46,9 +46,10 @@ No errors are defined.
 Example
 -------
 
-### Printing out the version of the ØMQ library
+### Getting the version of the ØMQ library
 
 ~~~{.example}
 INTEGER(KIND = C_INT) :: major, minor, patch
+
 CALL zmq_version(major, minor, patch)
 ~~~

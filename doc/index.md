@@ -3,6 +3,7 @@
 @PROJECT_NAME@/@PROJECT_VERSION@ API Reference
 ----------------------------------------------
 
+* [fzmq][] - ØMQ lightweight messaging kernel
 * [zmq_bind][] - accept incoming connections on a socket
 * [zmq_close][] - close ØMQ socket
 * [zmq_connect][] - create outgoing connection from socket
@@ -25,8 +26,8 @@
 * [zmq_msg_close][] - release ØMQ message
 * [zmq_msg_copy][] - copy content of a message to another message
 * [zmq_msg_data][] - retrieve pointer to message content
-* [zmq_msg_gets][] - get message metadata property
 * [zmq_msg_get][] - get message property
+* [zmq_msg_gets][] - get message metadata property
 * [zmq_msg_init][] - initialise empty ØMQ message
 * [zmq_msg_init_data][] - initialise ØMQ message from a supplied buffer
 * [zmq_msg_init_size][] - initialise ØMQ message of a specified size

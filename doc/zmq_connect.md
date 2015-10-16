@@ -25,8 +25,8 @@ Description
 The *zmq_connect()* function connects the _socket_ to an _endpoint_ and then
 accepts incoming connections on that endpoint.
 
-The _endpoint_ is a string consisting of a _transport_`://` followed by an
-_address_. The _transport_ specifies the underlying protocol to use. The
+The _endpoint_ is a string consisting of a _`transport`_`://` followed by an
+_address_.  The _transport_ specifies the underlying protocol to use. The
 _address_ specifies the transport-specific address to connect to.
 
 ØMQ provides the the following transports:
@@ -43,52 +43,56 @@ _inproc_
 _pgm_, _epgm_
   ~ reliable multicast transport using PGM, see [zmq_pgm][]
 
-Every ØMQ socket type except _ZMQ_PAIR_ supports one-to-many and many-to-one
-semantics. The precise semantics depend on the socket type and are defined in
+_tipc_
+  ~ unicast transport for use on clusters, see [zmq_tipc][]
+
+Every ØMQ socket type except *ZMQ_PAIR* supports one-to-many and many-to-one
+semantics.  The precise semantics depend on the socket type and are defined in
 [zmq_socket][].
 
-> For most transports and socket types the connection is not performed
-> immediately but as needed by ØMQ. Thus a successful call to *zmq_connect()*
-> does not mean that the connection was or could actually be established.
-> Because of this, for most transports and socket types the order in which
-> a _server_ socket is bound and a _client_ socket is connected to it does not
-> matter. The first exception is when using the inproc:// transport: you must
-> call *zmq_bind()* before calling *zmq_connect()*. The second exception are
-> _ZMQ_PAIR_ sockets, which do not automatically reconnect to endpoints.
+For most transports and socket types the connection is not performed
+immediately but as needed by ØMQ.  Thus a successful call to *zmq_connect()*
+does not mean that the connection was or could actually be established.
+Because of this, for most transports and socket types the order in which a
+_server_ socket is bound and a _client_ socket is connected to it does not
+matter.  The first exception is when using the inproc:// transport: you must
+call *zmq_bind()* before calling *zmq_connect()*.  The second exception are
+*ZMQ_PAIR* sockets, which do not automatically reconnect to endpoints.
 
-> Following a *zmq_connect()*, for socket types except for _ZMQ_ROUTER_,
-> the socket enters its normal _ready_ state. By contrast, following a
-> *zmq_bind()* alone, the socket enters a _mute_ state in which the socket
-> blocks or drops messages according to the socket type, as defined in
-> [zmq_socket][]. A _ZMQ_ROUTER_ socket enters its normal _ready_ state
-> for a specific peer only when handshaking is complete for that peer, which
-> may take an arbitrary time.
+Following a *zmq_connect()*, for socket types except for *ZMQ_ROUTER*, the
+socket enters its normal _ready_ state.  By contrast, following a *zmq_bind()*
+alone, the socket enters a _mute_ state in which the socket blocks or drops
+messages according to the socket type, as defined in [zmq_socket][].  A
+*ZMQ_ROUTER* socket enters its normal _ready_ state for a specific peer only
+when handshaking is complete for that peer, which may take an arbitrary time.
+
 
 Return value
 ------------
-The *zmq_connect()* function returns zero if successful. Otherwise it returns
+
+The *zmq_connect()* function returns zero if successful.  Otherwise it returns
 `-1` and sets _errno_ to one of the values defined below.
 
 
 Errors
 ------
 
-EINVAL
+*EINVAL*
   ~ The endpoint supplied is invalid.
 
-EPROTONOSUPPORT
+*EPROTONOSUPPORT*
   ~ The requested _transport_ protocol is not supported.
 
-ENOCOMPATPROTO
+*ENOCOMPATPROTO*
   ~ The requested _transport_ protocol is not compatible with the socket type.
 
-ETERM
-  ~ The ØMQ 'context' associated with the specified _socket_ was terminated.
+*ETERM*
+  ~ The ØMQ _context_ associated with the specified _socket_ was terminated.
 
-ENOTSOCK
+*ENOTSOCK*
   ~ The provided _socket_ was invalid.
 
-EMTHREAD
+*EMTHREAD*
   ~ No I/O thread is available to accomplish the task.
 
 
@@ -98,6 +102,11 @@ Example
 ### Connecting a subscriber socket to an in-process and a TCP transport
 
 ~~~{.example}
+TYPE(C_PTR) :: context
+TYPE(C_PTR) :: socket
+INTEGER(KIND = C_INT) :: rc
+
+context = zmq_ctx_new()
 socket = zmq_socket(context, ZMQ_SUB)
 rc = zmq_connect(socket, 'inproc://my_publisher')
 rc = zmq_connect(socket, 'tcp://server:5555')
@@ -109,3 +118,4 @@ See also
 
 [zmq_bind][]
 [zmq_socket][]
+[fzmq][]

@@ -17,8 +17,9 @@ FUNCTION zmq_ctx_new() RESULT(context)
 ~~~
 
 
-DESCRIPTION
+Description
 -----------
+
 The *zmq_ctx_new()* function creates a new ØMQ _context_.
 
 This function replaces the deprecated function [zmq_init][].
@@ -34,7 +35,7 @@ Return value
 ------------
 
 The *zmq_ctx_new()* function shall return an opaque handle to the newly created
-_context_ if successful.  Otherwise it shall return _C_NULL_PTR_ and set
+_context_ if successful.  Otherwise it shall return *C_NULL_PTR* and set
 _errno_ to one of the values defined below.
 
 
@@ -42,6 +43,18 @@ Errors
 ------
 
 No error values are defined for this function.
+
+
+Example
+-------
+
+### Create a new context
+
+~~~{.example}
+TYPE(C_PTR) :: context
+
+context = zmq_ctx_new()
+~~~
 
 
 See also

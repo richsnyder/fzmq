@@ -1,3 +1,4 @@
+[fzmq]: fzmq.html
 [zmq_bind]: zmq_bind.html
 [zmq_close]: zmq_close.html
 [zmq_connect]: zmq_connect.html

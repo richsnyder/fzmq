@@ -40,7 +40,7 @@ ENDFUNCTION()
 
 # Add pages to the documentation target.
 
-ADD_PAGES(index zmq_bind zmq_close zmq_connect zmq_ctx_destroy zmq_ctx_get
+ADD_PAGES(index fzmq zmq_bind zmq_close zmq_connect zmq_ctx_destroy zmq_ctx_get
 zmq_ctx_new zmq_ctx_set zmq_ctx_shutdown zmq_ctx_term zmq_curve
 zmq_curve_keypair zmq_disconnect zmq_errno zmq_getsockopt zmq_gssapi zmq_has
 zmq_init zmq_inproc zmq_ipc zmq_msg_close zmq_msg_copy zmq_msg_data zmq_msg_get

@@ -4,7 +4,7 @@
 Name
 ----
 
-zmq_msg_init - initialise an empty ØMQ message
+zmq_msg_init - initialize an empty ØMQ message
 
 
 Synopsis
@@ -21,15 +21,15 @@ FUNCTION zmq_msg_init(message) RESULT(code)
 Description
 -----------
 
-The *zmq_msg_init()* function shall initialise the message object referenced by
+The *zmq_msg_init()* function shall initialize the message object referenced by
 _message_ to represent an empty message.  This function is most useful when
 called before receiving a message with *zmq_recv()* or *zmq_msg_recv()*.
 
-Never access _zmq_msg_t_ members directly, instead always use the *zmq_msg*
+Never access *zmq_msg_t* members directly, instead always use the *zmq_msg*
 family of functions.
 
 The functions *zmq_msg_init()*, *zmq_msg_init_data()*, and
-*zmq_msg_init_size()* are mutually exclusive. Never initialize the same
+*zmq_msg_init_size()* are mutually exclusive.  Never initialize the same
 message twice.
 
 
@@ -51,9 +51,22 @@ Example
 ### Receiving a message from a socket
 
 ~~~{.example}
+TYPE(C_PTR) :: context
+TYPE(C_PTR) :: socket
 TYPE(ZMQ_MSG_T) :: message
+INTEGER(KIND = C_INT) :: rc
+INTEGER(KIND = C_INT) :: nbytes
+
+context = zmq_ctx_new()
+socket = zmq_socket(context, ZMQ_REP)
+rc = zmq_bind(socket, 'tcp://*:5555')
+
 rc = zmq_msg_init(message)
 nbytes = zmq_msg_recv(message, socket, 0)
+rc = zmq_msg_close(message)
+
+rc = zmq_close(socket)
+rc = zmq_ctx_term(context)
 ~~~
 
 
@@ -65,3 +78,4 @@ See also
 [zmq_msg_close][]
 [zmq_msg_data][]
 [zmq_msg_size][]
+[fzmq][]

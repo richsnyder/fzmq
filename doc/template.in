@@ -15,7 +15,9 @@
 </header>
 $body$
 <footer>
-  <p>FZMQ is public domain software.</p>
+  <p>FZMQ is copyright (c) 2015 Richard Snyder. FZMQ is free software
+  subject to the terms of the Mozilla Public License, v. 2.0.
+  <a href="http://mozilla.org/MPL/2.0/">Terms of Use</a></p>
   <p>ØMQ is copyright (c) 2007-2015 iMatix Corporation and Contributors.
   ØMQ is free software licensed under the LGPL.  ØMQ, ZeroMQ, and 0MQ are
   trademarks of iMatrix Corporation.
