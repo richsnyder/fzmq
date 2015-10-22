@@ -11,7 +11,7 @@ Synopsis
 --------
 
 ~~~{.synopsis}
-FUNCTION zmq_getsockopt(socket, option_name, option_value, option_len) RESULT(code)
+FUNCTION zmq_getsockopt(socket, option_name, bin_value, option_len) RESULT(code)
 FUNCTION zmq_getsockopt(socket, option_name, i32_value) RESULT(code)
 FUNCTION zmq_getsockopt(socket, option_name, i64_value) RESULT(code)
 FUNCTION zmq_getsockopt(socket, option_name, str_value) RESULT(code)
@@ -32,11 +32,11 @@ Description
 
 The *zmq_getsockopt()* function shall retrieve the value for the option
 specified by the _option_name_ argument for the ØMQ socket pointed to by the
-_socket_ argument, and store it in the buffer pointed to by the _option_value_
-argument. The _option_len_ argument is the size in bytes of the buffer pointed
-to by _option_value_; upon successful completion *zmq_getsockopt()* shall
-modify the _option_len_ argument to indicate the actual size of the option
-value stored in the buffer.
+_socket_ argument, and store it in the _*_value_ argument.  If present, the
+_option_len_ argument is the size in bytes of the buffer pointed to by
+_bin_value_; upon successful completion, *zmq_getsockopt()* shall modify the
+_option_len_ argument to indicate the actual size of the option value stored in
+the buffer.
 
 The following options can be retrieved with the *zmq_getsockopt()* function:
 
@@ -48,13 +48,10 @@ ZMQ_AFFINITY
     Affinity determines which threads from the ØMQ I/O thread pool associated
     with the socket's _context_ shall handle newly created connections.  A
     value of zero specifies no affinity, meaning that work shall be distributed
-    fairly among all ØMQ I/O threads in the thread pool. For non-zero values,
+    fairly among all ØMQ I/O threads in the thread pool.  For non-zero values,
     the lowest bit corresponds to thread 1, second lowest bit to thread 2 and
     so on.  For example, a value of 3 specifies that subsequent connections on
     _socket_ shall be handled exclusively by I/O threads 1 and 2.
-
-    See also [zmq_init][] for details on allocating the number of I/O
-    threads for a specific _context_.
 
     ----------------------- ------------
     Option value type       uint64_t
@@ -63,13 +60,12 @@ ZMQ_AFFINITY
     Applicable socket types N/A
     ----------------------- ------------
 
-
 ZMQ_BACKLOG
   ~ *Retrieve maximum length of the queue of outstanding connections*.  The
-    _ZMQ_BACKLOG_ option shall retrieve the maximum length of the queue of
+    *ZMQ_BACKLOG* option shall retrieve the maximum length of the queue of
     outstanding peer connections for the specified _socket_; this only applies
-    to connection-oriented transports. For details refer to your operating
-    system documentation for the _listen_ function.
+    to connection-oriented transports.  For details refer to your operating
+    system documentation for the *listen* function.
 
     ----------------------- --------------------------------------------
     Option value type       int
@@ -80,7 +76,7 @@ ZMQ_BACKLOG
 
 ZMQ_CURVE_PUBLICKEY
   ~ *Retrieve current CURVE public key*.  Retrieves the current long term
-    public key for the socket. You can provide either a 32 byte buffer, to
+    public key for the socket.  You can provide either a 32 byte buffer, to
     retrieve the binary key value, or a 41 byte buffer, to retrieve the key in
     a printable Z85 format.  NOTE: to fetch a printable key, the buffer must be
     41 bytes large to hold the 40-char key value and one null byte.
@@ -94,7 +90,7 @@ ZMQ_CURVE_PUBLICKEY
 
 ZMQ_CURVE_SECRETKEY
   ~ *Retrieve current CURVE secret key*.  Retrieves the current long term
-    secret key for the socket. You can provide either a 32 byte buffer, to
+    secret key for the socket.  You can provide either a 32 byte buffer, to
     retrieve the binary key value, or a 41 byte buffer, to retrieve the key in
     a printable Z85 format.  NOTE: to fetch a printable key, the buffer must be
     41 bytes large to hold the 40-char key value and one null byte.
@@ -108,10 +104,10 @@ ZMQ_CURVE_SECRETKEY
 
 ZMQ_CURVE_SERVERKEY
   ~ *Retrieve current CURVE server key*.  Retrieves the current server key for
-    the client socket. You can provide either a 32 byte buffer, to retrieve the
-    binary key value, or a 41-byte buffer, to retrieve the key in a printable
-    Z85 format.  NOTE: to fetch a printable key, the buffer must be 41 bytes
-    large to hold the 40-char key value and one null byte.
+    the client socket.  You can provide either a 32 byte buffer, to retrieve
+    the binary key value, or a 41-byte buffer, to retrieve the key in a
+    printable Z85 format.  NOTE: to fetch a printable key, the buffer must be
+    41 bytes large to hold the 40-char key value and one null byte.
 
     ----------------------- ------------------------------
     Option value type       binary data or Z85 text string
@@ -121,7 +117,7 @@ ZMQ_CURVE_SERVERKEY
     ----------------------- ------------------------------
 
 ZMQ_EVENTS
-  ~ *Retrieve socket event state*.  The _ZMQ_EVENTS_ option shall retrieve the
+  ~ *Retrieve socket event state*.  The *ZMQ_EVENTS* option shall retrieve the
     event state for the specified _socket_.  The returned value is a bit mask
     constructed by OR'ing a combination of the following event flags:
 
