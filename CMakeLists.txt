@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0 FATAL_ERROR)
 
-PROJECT(fzmq LANGUAGES Fortran VERSION 0.6.3)
+PROJECT(fzmq LANGUAGES Fortran VERSION 0.6.4)
 
 # Add custom modules to the module search path and mark them for installation.
 
