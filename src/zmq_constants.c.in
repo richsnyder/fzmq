@@ -29,6 +29,9 @@ const int emthread = EMTHREAD;
 const int zmq_version_major = ZMQ_VERSION_MAJOR;
 const int zmq_version_minor = ZMQ_VERSION_MINOR;
 const int zmq_version_patch = ZMQ_VERSION_PATCH;
+const int fzmq_version_major = @PROJECT_VERSION_MAJOR@;
+const int fzmq_version_minor = @PROJECT_VERSION_MINOR@;
+const int fzmq_version_patch = @PROJECT_VERSION_PATCH@;
 
 /* Context options */
 const int zmq_io_theads = ZMQ_IO_THREADS;
