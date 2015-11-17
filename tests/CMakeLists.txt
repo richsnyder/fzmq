@@ -2,10 +2,6 @@
 
 INCLUDE(CMakeParseArguments)
 
-# Locate all of the required dependencies.
-
-FIND_PACKAGE(OpenMP REQUIRED)
-
 # Define functions.
 
 FUNCTION(ADD_OPENMP_TEST A_NAME)

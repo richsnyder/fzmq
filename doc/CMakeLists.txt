@@ -1,7 +1,3 @@
-# Locate all of the required dependencies.
-
-FIND_PACKAGE(Pandoc REQUIRED)
-
 # Define functions.
 
 FUNCTION(ADD_PAGES)
