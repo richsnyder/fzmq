@@ -7,7 +7,7 @@ FUNCTION(ADD_PAGES)
 
   FOREACH(page ${ARGN})
     SET(cfg ${CMAKE_CURRENT_SOURCE_DIR}/${page}.md)
-    SET(src ${CMAKE_CURRENT_BINARY_DIR}/${page}.md)
+    SET(src ${CMAKE_CURRENT_BINARY_DIR}/${page}_.md)
     SET(dst ${CMAKE_CURRENT_BINARY_DIR}/${page}.html)
     CONFIGURE_FILE(${cfg} ${src} @ONLY)
     ADD_CUSTOM_COMMAND(
@@ -19,15 +19,21 @@ FUNCTION(ADD_PAGES)
     LIST(APPEND pages ${dst})
   ENDFOREACH()
 
-  SET(src ${CMAKE_CURRENT_SOURCE_DIR}/style.css)
-  SET(dst ${CMAKE_CURRENT_BINARY_DIR}/style.css)
-  ADD_CUSTOM_COMMAND(
-    OUTPUT ${dst}
-    MAIN_DEPENDENCY ${src}
-    COMMAND ${CMAKE_COMMAND}
-    ARGS -E copy ${src} ${dst}
-  )
-  LIST(APPEND pages ${dst})
+  GET_FILENAME_COMPONENT(srcdir "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+  GET_FILENAME_COMPONENT(bindir "${CMAKE_CURRENT_BINARY_DIR}" REALPATH)
+  IF(bindir STREQUAL srcdir)
+    LIST(APPEND pages ${CMAKE_CURRENT_SOURCE_DIR}/style.css)
+  ELSE()
+    SET(src ${CMAKE_CURRENT_SOURCE_DIR}/style.css)
+    SET(dst ${CMAKE_CURRENT_BINARY_DIR}/style.css)
+    ADD_CUSTOM_COMMAND(
+      OUTPUT ${dst}
+      MAIN_DEPENDENCY ${src}
+      COMMAND ${CMAKE_COMMAND}
+      ARGS -E copy ${src} ${dst}
+    )
+    LIST(APPEND pages ${dst})
+  ENDIF()
 
   ADD_CUSTOM_TARGET(doc ALL DEPENDS ${pages})
   INSTALL(FILES ${pages} DESTINATION doc/html)

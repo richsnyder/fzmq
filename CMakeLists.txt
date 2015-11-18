@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0 FATAL_ERROR)
 
-PROJECT(fzmq LANGUAGES C Fortran VERSION 0.6.9)
+PROJECT(fzmq LANGUAGES C Fortran VERSION 0.7.0)
 
 # Add custom modules to the module search path and mark them for installation.
 
@@ -29,6 +29,6 @@ ENDIF()
 
 OPTION(BUILD_DOCS "Build documentation." ON)
 IF (BUILD_DOCS)
-  FIND_PACKAGE(Pandoc)
+  FIND_PACKAGE(Pandoc REQUIRED)
   ADD_SUBDIRECTORY(doc)
 ENDIF()

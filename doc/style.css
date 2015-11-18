@@ -87,14 +87,22 @@ th, td {
 
 a {
   background-color: #F7F7F7;
-  color: #2A5DB0;
+  color: #F96549;
   padding: 0.25em 0.15em;
   text-decoration: none;
 }
 
 a:hover {
-  color: #5B8AD7;
+  color: #C63216;
   text-decoration: underline;
+}
+
+#api-index ~ ul {
+  list-style: circle;
+}
+
+#api-index ~ ul li {
+  margin: 0.2em 0;
 }
 
 .example {

@@ -1,9 +1,9 @@
 % Table of Contents
 
-@PROJECT_NAME@/@PROJECT_VERSION@ API Reference
+@PROJECT_NAME@/@PROJECT_VERSION@ API Reference {#api-index}
 ----------------------------------------------
 
-* [fzmq][] - ØMQ lightweight messaging kernel
+* [fzmq][] - Fortran binding to the ØMQ lightweight messaging kernel
 * [zmq_bind][] - accept incoming connections on a socket
 * [zmq_close][] - close ØMQ socket
 * [zmq_connect][] - create outgoing connection from socket
