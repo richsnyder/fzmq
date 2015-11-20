@@ -1,3 +1,6 @@
+# This file is declared a work of the U.S. Government and is not subject to
+# copyright protection in the United States.
+
 # Define functions.
 
 FUNCTION(ADD_PAGES)

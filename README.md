@@ -43,8 +43,11 @@ RC = FZMQ_BIND(SOCKET, 'tcp://*:5555' // C_NULL_CHAR)
 License
 -------
 
-FZMQ is copyright (c) 2015 Richard Snyder.  FZMQ is free software subject to
-the terms of the Mozilla Public License, v. 2.0.  Terms of use can be found in
+FZMQ is, per 17 USC § 101, a joint work of iMatix Corporation and Contributors
+and the United States Government.  Portions developed solely by U.S. Government
+personnel are not subject to copyright protections in the United States.  These
+portions are individually marked.  The joint work as a whole is subject to the
+terms of the Mozilla Public License, v 2.0.  Terms of use can be found in
 `LICENSE.md` or at <http://mozilla.org/MPL/2.0/>.
 
 ØMQ is copyright (c) 2007-2015 iMatix Corporation and Contributors.  ØMQ is

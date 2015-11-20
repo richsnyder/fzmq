@@ -13,6 +13,11 @@
 #   ZeroMQ_INCLUDE_DIR      Where to find the ZeroMQ header files
 #   ZeroMQ_LIBRARY          Where to find the ZeroMQ library
 #
+# ------------------------------------------------------------------------------
+#
+# This file is declared a work of the U.S. Government and is not subject to
+# copyright protection in the United States.
+#
 # ==============================================================================
 
 FIND_PATH(ZeroMQ_INCLUDE_DIR zmq.h)

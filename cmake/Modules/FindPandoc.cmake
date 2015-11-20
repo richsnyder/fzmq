@@ -11,6 +11,11 @@
 #   Pandoc_citeproc_EXECUTABLE   Full path to the Pandoc citeproc executable
 #   Pandoc_VERSION               The version of the Pandoc program
 #
+# ------------------------------------------------------------------------------
+#
+# This file is declared a work of the U.S. Government and is not subject to
+# copyright protection in the United States.
+#
 # ==============================================================================
 
 INCLUDE(FindPackageHandleStandardArgs)
