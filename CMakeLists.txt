@@ -1,9 +1,12 @@
+# DISTRIBUTION STATEMENT A. Approved for public release; distribution is
+# unlimited.  Granted clearance per 88ABW-2015-5731.
+#
 # This file is declared a work of the U.S. Government and is not subject to
 # copyright protection in the United States.
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0 FATAL_ERROR)
 
-PROJECT(fzmq LANGUAGES C Fortran VERSION 0.7.1)
+PROJECT(fzmq LANGUAGES C Fortran VERSION 0.8.0)
 
 # Add custom modules to the module search path and mark them for installation.
 
